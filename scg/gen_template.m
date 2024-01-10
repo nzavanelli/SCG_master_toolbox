@@ -11,7 +11,7 @@ locs_s = locs./Fs; %Get the pk locations in seconds
 template = []; %define a template beat to learn the average heartbeat during rest
 
 for k = 1:length(locs_s)
-    if (locs_s(k) > 200 & locs_s(k) < 300)
+    if (locs_s(k) > 1 & locs_s(k) < 10)
         template = [template , SCGar(:,k)];
     end
 end

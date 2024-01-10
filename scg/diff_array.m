@@ -11,10 +11,10 @@ locs_s = locs./Fs; %Get the pk locations in seconds
 beatAvs = [];
 energy = rms(meanTemplate);
 
-for s = 5:(length(ac_f)./(250.*30))-5
+for s = 1:(length(ac_f)./(250.*2))-5
     seg = [];
     for j = 1:length(locs_s)
-        if (locs_s(j) > (s.*30)-30 & locs_s(j) < (30.*s)+30)
+        if (locs_s(j) > (s.*2)-2 & locs_s(j) < (2.*s)+2)
             temp = SCGar(:,j);
             if(rms(temp)< thold.*energy)
                 seg = [seg, temp];

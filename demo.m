@@ -9,8 +9,8 @@ addpath(genpath(folder));
 
 %% Load Data
 
-T1 = readtable('scg_data.csv'); %Read CSV of data
-T1Arr = table2array(T1); %Break into arrays
+load('scgData.mat')
+T1Arr = table2array(data);
 %Create individual arrays
 tm = T1Arr(:,1); %time
 ax = T1Arr(:,2); % x acc
@@ -30,11 +30,6 @@ az = az(~ind);
 ax = ax(~ind);
 tm = tm(~ind);
 
-%% Section to look at
-ax = ax(1:5.5e5);
-ay = ay(1:5.5e5);
-az = az(1:5.5e5);
-tm = tm(1:5.5e5);
 
 %% Filter
 cutoff = [4 20]; %BPF for SCG
@@ -85,13 +80,6 @@ set(gcf,'color','w');
 set(gca,'FontSize',10);
 box on;
 
-% Ensemble average for a random window
-[mean_scg, sdSCG, temp, t] = segment_scg(az_f(1e5:1e5+7500), Fs,1);
-ylabel('AU')
-xlabel('Time (s)')
-title('Ensembled SCG Signals')
-set(gcf,'color','w');
-set(gca,'FontSize',10);
 
 figure
 plot(t,mean_scg,'b');
@@ -113,7 +101,7 @@ box on;
 
 %% Create waterfall plot
 
-[scg_reform] = scg_wfall(az_f(1e5:1e5+7500), SCGar,Fs, 1, 10, 12);
+[scg_reform] = scg_wfall(az_f, SCGar,Fs, 1, 10, 12);
 
 %% Generate  advanced features
 
